@@ -1,0 +1,16 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t ptathagat/docker-react -f Dockerfile.dev .
+
+
+#to run the command that needs to be executed
+#-e CI=true : for test suite to automatically exits and not wait for stdin
+#or use docker run ptathagat/docker-react npm run test -- --coverage
+script:
+  - docker run -e CI=true ptathagat/docker-react npm run test
+
+language: generic 
+
